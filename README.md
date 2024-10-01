@@ -1,5 +1,5 @@
-# HelloEsri.js
+# JS Stack Read
 
-This is an exercise in creating a map and using an ArcGIS developer API key according to this guide: https://developers.arcgis.com/javascript/latest/tutorials/display-a-map/.
+Multi-stage lab to learn how to create a front-end online map application based on Esri JS that will connect to a back-end based on REST and ArcGIS Online
 
-Follow this link to see the map: https://maic1711.github.io/HelloEsri.js/
+https://maic1711.github.io/AGOL/
