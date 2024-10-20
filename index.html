@@ -55,19 +55,34 @@
         }
 
         // create visual symbol for the point
-        const symbolmarker = {
+        const symbolMarker = {
           type: "simple-marker",
           style: "diamond",
           color: [164, 36, 59],
         }
 
-        // create a graphic with its geometry as the point and its symbol as the marker
-        const point_graphic = new Graphic({
+        // create popup template, which formats and defines content of popup
+        const popupTemplate = {
+          title: "{Name}",
+          content: "{Description}"
+        }
+
+        // define name-value pairs of fields and field values associated with the graphic
+        const attributes = {
+          Name: "Musee d'Orsay",
+          Description: "Museum located at the former Gare d'Orsay railway station that showcases Impressionist and Post-Impressionist paintings and 19th-century sculptures"
+        }
+
+        // create a graphic
+        const pointGraphic = new Graphic({
+          // assign geometry, symbol, attributes, and popup template to the graphic using constructors defined above
           geometry: point,
-          symbol: symbolmarker,
+          symbol: symbolMarker,
+          attributes: attributes,
+          popupTemplate: popupTemplate
         });
 
-        graphicsLayer.add(point_graphic);
+        graphicsLayer.add(pointGraphic);
 
 
       });
