@@ -21,7 +21,13 @@
     <script src="https://js.arcgis.com/4.30/"></script>
 
     <script>
-      require(["esri/config", "esri/Map", "esri/views/MapView"], function(esriConfig, Map, MapView) {
+    require([  
+    "esri/config",  
+    "esri/Map",  
+    "esri/views/MapView",   
+    "esri/Graphic",  
+    "esri/layers/GraphicsLayer"   
+    ], function(esriConfig, Map, MapView, Graphic, GraphicsLayer) {
 
         esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurCp0yZc6iRenDrhA3AMRYMb-ybUwBFVK_OKiBCZf4k4ql4ildsvRvwu2n9YSSahzZiyjQ67cvFxEB8U45MsT1tnpVqKoAKAqt-T4ufLFCv_TZnloiIBdv33_qGIEV0i_K1z9F-HXXGTvUmcfZbvLckqFqTUfJnqB6oAN5tl2fGKT-OME4yqyYGmWeCrpV0wOi2BzpY3-HqsVZJ3IFuxIXc8.AT1_uMncBI2j";
 
@@ -31,10 +37,38 @@
 
         const view = new MapView({
           map: map,
-          center: [-118.805, 34.027], // Longitude, latitude
-          zoom: 13, // Zoom level
-          container: "viewDiv" // Div element
+          center: [2.349014, 48.864716], // longitude, latitude of paris, france
+          zoom: 13, // zoom level
+          container: "viewDiv" // div element
         });
+
+        const graphicsLayer = new GraphicsLayer(); // create graphics layer
+        map.add(graphicsLayer); // add to map
+
+        // create a point geometry
+        const point = { 
+          type: "point",
+
+          // musee d'orsay
+          longitude: 2.326389,
+          latitude: 48.86,
+        }
+
+        // create visual symbol for the point
+        const symbolmarker = {
+          type: "simple-marker",
+          style: "diamond",
+          color: [164, 36, 59],
+        }
+
+        // create a graphic with its geometry as the point and its symbol as the marker
+        const point_graphic = new Graphic({
+          geometry: point,
+          symbol: symbolmarker,
+        });
+
+        graphicsLayer.add(point_graphic);
+
 
       });
     </script>
