@@ -41,7 +41,7 @@
         const view = new MapView({
           map: map,
           center: [2.3239, 48.8645], // longitude, latitude of musee d'orsay in paris, france
-          zoom: 15, // zoom level
+          zoom: 14, // zoom level
           container: "viewDiv" // div element
         });
 
@@ -140,11 +140,20 @@
         graphicsLayer.add(lineGraphic);
         graphicsLayer.add(polygonGraphic);
 
+        // create a popup for feature layer
+        const gardensPopup = {
+          "title": "Garden",
+          "content": "<b>Name:</b> {nom_du_lie}<br><b>Address:</b> {adresse}<br>" // from feature layer REST Services Directory
+        }
+
         // create a feature layer
         const gardensLayer = new FeatureLayer({
           url: "https://services.arcgis.com/d3voDfTFbHOCRwVR/arcgis/rest/services/jardins_ouverts/FeatureServer",
+          outFields: ["nom_du_lie", "adresse"],
+          popupTemplate: gardensPopup
         });
 
+        // add feature layer to map
         map.add(gardensLayer);
 
       });
