@@ -143,13 +143,13 @@
         // create a popup for feature layer
         const gardensPopup = {
           "title": "Garden",
-          "content": "<b>Name:</b> {nom_du_lie}<br><b>Address:</b> {adresse}<br>" // from feature layer REST Services Directory
+          "content": "<b>Name:</b> {nom_du_lie}<br> <b>Address:</b> {adresse}<br> <b>Image:</b> {image_du_l}<br> <b>See events here!</b> {lien}<br>" // from feature layer REST Services Directory
         }
 
         // create a feature layer
         const gardensLayer = new FeatureLayer({
           url: "https://services.arcgis.com/d3voDfTFbHOCRwVR/arcgis/rest/services/jardins_ouverts/FeatureServer",
-          outFields: ["nom_du_lie", "adresse"],
+          outFields: ["nom_du_lie", "adresse", "image_du_li", "lien"],
           popupTemplate: gardensPopup
         });
 
