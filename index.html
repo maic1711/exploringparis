@@ -159,6 +159,24 @@
         // add feature layer to map
         map.add(gardensLayer);
 
+        // create a popup for hosted feature layer
+        const schoolsPopup = {
+          "title": "Eduational Facility",
+          "content": ` 
+          <b>Name:</b> {name}<br> 
+          <b>Type:</b> {amenity}<br> 
+          <b>Publi or private: {operator_t}<br> ` // from hosted feature layer REST Services Directory
+        }
+
+      // create a hosted feature layer
+      const schoolsLayer = new FeatureLayer({
+        url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/FranceEducationFacilities/FeatureServer",
+        outFields: ["name", "amenity", "operator_t"],
+        popupTemplate: schoolsPopup
+      });
+
+      map.add(schoolsLayer);
+
       });
 
     </script>
