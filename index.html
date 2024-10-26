@@ -168,16 +168,28 @@
           <b>Publi or private: {operator_t}<br> ` // from hosted feature layer REST Services Directory
         }
 
-      // create a hosted feature layer
-      const schoolsLayer = new FeatureLayer({
-        url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/FranceEducationFacilities/FeatureServer",
-        outFields: ["name", "amenity", "operator_t"],
-        popupTemplate: schoolsPopup
-      });
+        // create icon for hosted feature layer
+        const schoolsRenderer = {
+          "type": "simple",
+          "symbol": {
+            "type": "picture-marker",
+            "url": "schoolicon.png",
+            "width": "18px",
+            "height": "18px"
+          }
+        }
 
-      map.add(schoolsLayer);
+        // create hosted feature layer
+        const schoolsLayer = new FeatureLayer({
+          url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/FranceEducationFacilities/FeatureServer",
+          outFields: ["name", "amenity", "operator_t"],
+          popupTemplate: schoolsPopup,
+          renderer: schoolsRenderer
+        });
 
-      });
+        map.add(schoolsLayer);
+
+        });
 
     </script>
 
