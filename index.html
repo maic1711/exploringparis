@@ -41,7 +41,7 @@
         const view = new MapView({
           map: map,
           center: [2.3239, 48.8645], // longitude, latitude of musee d'orsay in paris, france
-          zoom: 14, // zoom level
+          zoom: 15, // zoom level
           container: "viewDiv" // div element
         });
 
@@ -179,12 +179,33 @@
           }
         }
 
+        // create label for icon
+        const schoolsLabel = {
+          symbol: {
+            type: "text",
+            color: [0, 0, 0],
+            haloColor: [39, 62, 71],
+            haloSize: 1,
+            font: {
+              size: 10,
+              family: "calibri",
+              weight: "normal"
+            }
+          },
+          labelPlacement: "above-center",
+          labelExpressionInfo: {
+            expression: "$feature.amenity"
+          }
+        };
+
         // create hosted feature layer
         const schoolsLayer = new FeatureLayer({
           url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/FranceEducationFacilities/FeatureServer",
           outFields: ["name", "amenity", "operator_t"],
           popupTemplate: schoolsPopup,
-          renderer: schoolsRenderer
+          renderer: schoolsRenderer,
+          definitionExpression: "amenity = 'school'", // SQL filter for facilities that are schools
+          labelingInfor: [schoolsLabel]
         });
 
         map.add(schoolsLayer);
