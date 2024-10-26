@@ -37,8 +37,8 @@
 
         const view = new MapView({
           map: map,
-          center: [2.326389, 48.86], // longitude, latitude of paris, france
-          zoom: 3, // zoom level
+          center: [2.3239, 48.8645], // longitude, latitude of musee d'orsay in paris, france
+          zoom: 15, // zoom level
           container: "viewDiv" // div element
         });
 
@@ -50,7 +50,7 @@
           type: "point",
 
           // musee d'orsay
-          longitude: 2.326389,
+          longitude: 2.326389, 
           latitude: 48.86,
         }
 
@@ -85,7 +85,7 @@
         // create a line
         const polyline = {
           type: "polyline",
-          paths: [[2.299533, 48.863077], [2.3264, 48.8606], [2.3274, 48.8600], [2.3284, 48.8594]] // portion of la seine
+          paths: [[2.3087, 48.8636], [2.3185, 48.8638], [2.32544, 48.8615], [2.3351, 48.8588]] // portion of la seine
         }
 
         const lineSymbol = {
