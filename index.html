@@ -61,7 +61,7 @@
         const symbolMarker = {
           type: "simple-marker",
           style: "diamond",
-          color: [164, 36, 59],
+          color: "#A4243B",
         }
 
         // create popup template, which formats and defines content of popup
@@ -93,7 +93,7 @@
 
         const lineSymbol = {
           type: "simple-line",
-          color: [39, 62, 100],
+          color: "#273E64",
           width: 3
         }
 
@@ -117,9 +117,9 @@
 
         const polygonSymbol = {
           type: "simple-fill",
-          color: [216, 151, 60, 0.75],
+          color: "#D8973C",
           outline: {
-            color: [189, 99, 47],
+            color: "#BD632F",
             width: 1
           }
         }
@@ -174,19 +174,19 @@
           "symbol": {
             "type": "picture-marker",
             "url": "schoolicon.png",
-            "width": "18px",
-            "height": "18px"
+            "width": 14,
+            "height": 14
           }
         }
 
         // icon for kindergarten
-        const kindergartenRenderer = {
+        const kindergartensRenderer = {
           "type": "simple",
           "symbol": {
             "type": "picture-marker",
             "url": "kindericon.png",
-            "width": "18px",
-            "height": "18px"
+            "width": 14,
+            "height": 14
           }
         }
 
@@ -196,8 +196,8 @@
           "symbol": {
             "type": "picture-marker",
             "url": "collegeicon.png",
-            "width": "18px",
-            "height": "18px"
+            "width": 14,
+            "height": 14
           }
         }
 
@@ -205,9 +205,9 @@
         const facilitiesLabel = {
           symbol: {
             type: "text",
-            color: [0, 0, 0],
-            haloColor: [39, 62, 71],
-            haloSize: 1,
+            color: "#FFFFFF",
+            haloColor: "#D9D9D9",
+            haloSize: 0.5,
             font: {
               size: 10,
               family: "calibri",
@@ -216,7 +216,7 @@
           },
           labelPlacement: "above-center",
           labelExpressionInfo: {
-            expression: "$feature.amenity"
+            expression: "$feature.name"
           }
         };
 
@@ -233,12 +233,12 @@
         map.add(schoolsLayer);
 
         // kindergarten layer
-        const kindergartenLayer = new FeatureLayer({
+        const kindergartensLayer = new FeatureLayer({
           url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/FranceEducationFacilities/FeatureServer",
           outFields: ["name", "amenity", "operator_t"],
           popupTemplate: facilitiesPopup,
-          renderer: kindergartenRenderer,
-          definitionExpression: "amenity = 'kindergarten'", // SQL filter for facilities that are schools
+          renderer: kindergartensRenderer,
+          definitionExpression: "amenity = 'kindergarten'", // SQL filter for facilities that are kindergartens
           labelingInfo: [facilitiesLabel]
         });  
 
@@ -250,7 +250,7 @@
           outFields: ["name", "amenity", "operator_t"],
           popupTemplate: facilitiesPopup,
           renderer: collegesRenderer,
-          definitionExpression: "amenity = 'college' OR amenity = 'university'", // SQL filter for facilities that are schools
+          definitionExpression: "amenity = 'college' OR amenity = 'university'", // SQL filter for facilities that are colleges or universities
           labelingInfo: [facilitiesLabel]
         }); 
 
