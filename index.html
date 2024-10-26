@@ -165,7 +165,7 @@
           "content": ` 
           <b>Name:</b> {name}<br> 
           <b>Type:</b> {amenity}<br> 
-          <b>Publi or private: {operator_t}<br> ` // from hosted feature layer REST Services Directory
+          <b>Public or private: {operator_t}<br> ` // from hosted feature layer REST Services Directory
         }
 
         // icon for (primary/secondary) schools
@@ -209,7 +209,7 @@
             haloColor: "#D9D9D9",
             haloSize: 0.5,
             font: {
-              size: 10,
+              size: 12,
               family: "calibri",
               weight: "normal"
             }
@@ -218,7 +218,7 @@
           labelExpressionInfo: {
             expression: "$feature.name"
           }
-        };
+        }
 
         // schools layer
         const schoolsLayer = new FeatureLayer({
@@ -242,7 +242,7 @@
           labelingInfo: [facilitiesLabel]
         });  
 
-        map.add(kindergartenLayer)
+        map.add(kindergartensLayer);
 
         // colleges layer
         const collegesLayer = new FeatureLayer({
