@@ -37,8 +37,8 @@
 
         const view = new MapView({
           map: map,
-          center: [2.349014, 48.864716], // longitude, latitude of paris, france
-          zoom: 13, // zoom level
+          center: [2.326389, 48.86], // longitude, latitude of paris, france
+          zoom: 3, // zoom level
           container: "viewDiv" // div element
         });
 
@@ -70,10 +70,10 @@
         // define name-value pairs of fields and field values associated with the graphic
         const attributes = {
           Name: "Musee d'Orsay",
-          Description: "Museum located at the former Gare d'Orsay railway station that showcases Impressionist and Post-Impressionist paintings and 19th-century sculptures"
+          Description: "This museum is located at the former Gare d'Orsay railway station, showcasing Impressionist and Post-Impressionist paintings and 19th-century sculptures!"
         }
 
-        // create a graphic
+        // create a graphic of the point
         const pointGraphic = new Graphic({
           // assign geometry, symbol, attributes, and popup template to the graphic using constructors defined above
           geometry: point,
@@ -82,8 +82,60 @@
           popupTemplate: popupTemplate
         });
 
-        graphicsLayer.add(pointGraphic);
+        // create a line
+        const polyline = {
+          type: "polyline",
+          paths: [[2.299533, 48.863077], [2.3264, 48.8606], [2.3274, 48.8600], [2.3284, 48.8594]] // portion of la seine
+        }
 
+        const lineSymbol = {
+          type: "simple-line",
+          color: [39, 62, 100],
+          width: 3
+        }
+
+        const lineAttributes = {
+          Name: "La Seine",
+          Description: "This is only a portion of the 777-km (483-mi) river that covers most of northern France!"
+        }
+
+        const lineGraphic = new Graphic({
+            geometry: polyline,
+            symbol: lineSymbol,
+            attributes: lineAttributes,
+            popupTemplate: popupTemplate
+        });
+        
+        // create a polygon
+        const polygon = {
+          type: "polygon",
+          rings: [[2.335257, 48.861646], [2.337608, 48.861056], [2.337205, 48.86016], [2.334738, 48.86077]]
+        }
+
+        const polygonSymbol = {
+          type: "simple-fill",
+          color: [216, 151, 60, 0.75],
+          outline: {
+            color: [189, 99, 47],
+            width: 1
+          }
+        }
+
+        const polygonAttributes = {
+          Name: "Musee du Louvre",
+          Description: "Bonjour de l'autre côté de la Seine! This is the Louvre Museum, which owns 615,797 objects from diverse cultures and time periods."
+        }
+
+        const polygonGraphic = new Graphic({
+          geometry: polygon,
+          symbol: polygonSymbol,
+          attributes: polygonAttributes,
+          popupTemplate: popupTemplate
+        });
+
+        graphicsLayer.add(pointGraphic);
+        graphicsLayer.add(lineGraphic);
+        graphicsLayer.add(polygonGraphic);
 
       });
     </script>
