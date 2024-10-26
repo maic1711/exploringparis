@@ -159,16 +159,16 @@
         // add feature layer to map
         map.add(gardensLayer);
 
-        // create a popup for hosted feature layer
-        const schoolsPopup = {
-          "title": "Eduational Facility",
+        // create a popup for educational facilities (hosted feature layer)
+        const facilitiesPopup = {
+          "title": "Educational Facility",
           "content": ` 
           <b>Name:</b> {name}<br> 
           <b>Type:</b> {amenity}<br> 
           <b>Publi or private: {operator_t}<br> ` // from hosted feature layer REST Services Directory
         }
 
-        // create icon for hosted feature layer
+        // icon for (primary/secondary) schools
         const schoolsRenderer = {
           "type": "simple",
           "symbol": {
@@ -179,8 +179,30 @@
           }
         }
 
-        // create label for icon
-        const schoolsLabel = {
+        // icon for kindergarten
+        const kindergartenRenderer = {
+          "type": "simple",
+          "symbol": {
+            "type": "picture-marker",
+            "url": "kindericon.png",
+            "width": "18px",
+            "height": "18px"
+          }
+        }
+
+        // icon for colleges/universities
+        const collegesRenderer = {
+          "type": "simple",
+          "symbol": {
+            "type": "picture-marker",
+            "url": "collegeicon.png",
+            "width": "18px",
+            "height": "18px"
+          }
+        }
+
+        // label for facilities icons
+        const facilitiesLabel = {
           symbol: {
             type: "text",
             color: [0, 0, 0],
@@ -198,18 +220,42 @@
           }
         };
 
-        // create hosted feature layer
+        // schools layer
         const schoolsLayer = new FeatureLayer({
           url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/FranceEducationFacilities/FeatureServer",
           outFields: ["name", "amenity", "operator_t"],
-          popupTemplate: schoolsPopup,
+          popupTemplate: facilitiesPopup,
           renderer: schoolsRenderer,
           definitionExpression: "amenity = 'school'", // SQL filter for facilities that are schools
-          labelingInfor: [schoolsLabel]
+          labelingInfo: [facilitiesLabel]
         });
 
         map.add(schoolsLayer);
 
+        // kindergarten layer
+        const kindergartenLayer = new FeatureLayer({
+          url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/FranceEducationFacilities/FeatureServer",
+          outFields: ["name", "amenity", "operator_t"],
+          popupTemplate: facilitiesPopup,
+          renderer: kindergartenRenderer,
+          definitionExpression: "amenity = 'kindergarten'", // SQL filter for facilities that are schools
+          labelingInfo: [facilitiesLabel]
+        });  
+
+        map.add(kindergartenLayer)
+
+        // colleges layer
+        const collegesLayer = new FeatureLayer({
+          url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/FranceEducationFacilities/FeatureServer",
+          outFields: ["name", "amenity", "operator_t"],
+          popupTemplate: facilitiesPopup,
+          renderer: collegesRenderer,
+          definitionExpression: "amenity = 'college' OR amenity = 'university'", // SQL filter for facilities that are schools
+          labelingInfo: [facilitiesLabel]
+        }); 
+
+        map.add(collegesLayer);
+        
         });
 
     </script>
