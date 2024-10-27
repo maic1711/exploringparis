@@ -1,5 +1,7 @@
-# JS Stack Read
+# JS Stack Write
 
-Multi-stage lab to learn how to create a front-end online map application based on Esri JS that will connect to a back-end based on REST and ArcGIS Online
+Multi-stage lab to learn how to create a JavaScript-only geospatial full stack with ArcGIS Online and the ESRI JS API
 
-https://maic1711.github.io/agol/
+AGOL will serve as the backend database that stores geospatial data to which the frontend application will read and write
+
+https://maic1711.github.io/agolrest/
