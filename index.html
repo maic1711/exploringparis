@@ -257,16 +257,16 @@
 
         map.add(collegesLayer);
 
-        const uniRank = new FeatureLayer({
-          url:"https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/Education_Facilities/FeatureServer",
-          outFields: ["NationalRank"]
+        const uniSpecial = new FeatureLayer({
+          url:"https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/Universities/FeatureServer",
+          outFields: ["Specialization"]
         });
 
         map.add(uniRank);
 
         // set the point layer's LayerInfo
         const pointInfos = {
-        layer: uniRank
+        layer: uniSpecial
         }
 
         // editor constructor
