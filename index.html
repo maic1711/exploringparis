@@ -28,10 +28,11 @@
     "esri/Graphic",  
     "esri/layers/GraphicsLayer",
     "esri/layers/FeatureLayer",
-    "esri/widgets/Editor"
+    "esri/widgets/Editor",
+    "esri/widgets/Legend"
     ],
 
-    function(esriConfig, Map, MapView, Graphic, GraphicsLayer, FeatureLayer, Editor) {
+    function(esriConfig, Map, MapView, Graphic, GraphicsLayer, FeatureLayer, Editor, Legend) {
 
         esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurCp0yZc6iRenDrhA3AMRYMb-ybUwBFVK_OKiBCZf4k4ql4ildsvRvwu2n9YSSahzZiyjQ67cvFxEB8U45MsT1tnpVqKoAKAqt-T4ufLFCv_TZnloiIBdv33_qGIEV0i_K1z9F-HXXGTvUmcfZbvLckqFqTUfJnqB6oAN5tl2fGKT-OME4yqyYGmWeCrpV0wOi2BzpY3-HqsVZJ3IFuxIXc8.AT1_uMncBI2j";
 
@@ -308,6 +309,33 @@
 
         // add the widget to the view
         view.ui.add(editor, "top-right");
+
+        const legend = new Legend({
+          view: view,
+          layerInfos: [
+            {
+              layer: gardensLayer,
+              title: "Gardens"
+            },
+
+            {
+              layer: schoolsLayer,
+              title: "Primary and Secondary Schools"
+            },
+
+            {
+              layer: kindergartensLayer,
+              title: "Kindergartens"
+            },
+
+            {
+              layer: universitiesLayer,
+              title: "Universities"
+            }
+          ]
+        });
+
+        view.ui.add(Legen, "bottom-left");
         
     });
 
