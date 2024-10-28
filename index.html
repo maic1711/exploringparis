@@ -310,6 +310,7 @@
         // add the widget to the view
         view.ui.add(editor, "top-right");
 
+        // create a legend with all previously created layers
         const legend = new Legend({
           view: view,
           layerInfos: [
@@ -337,7 +338,8 @@
               layer: uniSpecial,
               title: "University Specializations"
             }
-          ]
+          ],
+          style: "card"
         });
 
         view.ui.add(legend, "bottom-left");
