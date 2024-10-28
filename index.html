@@ -191,8 +191,8 @@
           }
         }
 
-        // icon for colleges/universities
-        const collegesRenderer = {
+        // icon for universities
+        const universitiesRenderer = {
           "type": "simple",
           "symbol": {
             "type": "picture-marker",
@@ -221,13 +221,13 @@
           }
         }
 
-        // schools layer
+        // schools/college layer (college in france = secondary school)
         const schoolsLayer = new FeatureLayer({
           url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/FranceEducationFacilities/FeatureServer",
           outFields: ["name", "amenity", "operator_t"],
           popupTemplate: facilitiesPopup,
           renderer: schoolsRenderer,
-          definitionExpression: "amenity = 'school'", // SQL filter for facilities that are schools
+          definitionExpression: "amenity = 'school' OR amenity = 'college", // SQL filter for facilities that are schools/colleges
           labelingInfo: [facilitiesLabel]
         });
 
@@ -245,21 +245,52 @@
 
         map.add(kindergartensLayer);
 
-        // colleges layer
-        const collegesLayer = new FeatureLayer({
+        // university layer
+        const universitiesLayer = new FeatureLayer({
           url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/FranceEducationFacilities/FeatureServer",
           outFields: ["name", "amenity", "operator_t"],
           popupTemplate: facilitiesPopup,
-          renderer: collegesRenderer,
-          definitionExpression: "amenity = 'college' OR amenity = 'university'", // SQL filter for facilities that are colleges or universities
+          renderer: universitiesRenderer,
+          definitionExpression: "amenity = 'university'", // SQL filter for facilities that are colleges or universities
           labelingInfo: [facilitiesLabel]
         }); 
 
-        map.add(collegesLayer);
+        map.add(universitiesLayer);
+
+        // icon for Universities specializations
+        const specialsRenderer = {
+          "type": "simple",
+          "symbol": {
+            "type": "picture-marker",
+            "url": "specialicon.png",
+            "width": 12,
+            "height": 12
+          }
+        }
+
+        const specialsLabel = {
+          symbol: {
+            type: "text",
+            color: "#FFFFFF",
+            haloColor: "#BD632F",
+            haloSize: 1,
+            font: {
+              size: 10,
+              family: "calibri",
+              weight: "normal"
+            }
+          },
+          labelPlacement: "below-center",
+          labelExpressionInfo: {
+            expression: "$feature.Specialization"
+          }
+        }
 
         const uniSpecial = new FeatureLayer({
           url:"https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/Universities/FeatureServer",
-          outFields: ["Specialization"]
+          outFields: ["Specialization"],
+          renderer: specialsRenderer,
+          labelingInfo: [specialsLabel]
         });
 
         map.add(uniSpecial);
