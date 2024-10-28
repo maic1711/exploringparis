@@ -78,7 +78,7 @@
           Description: "This museum is located at the former Gare d'Orsay railway station, showcasing Impressionist and Post-Impressionist paintings and 19th-century sculptures!"
         }
 
-        // create a graphic of the point
+        // create a graphic (object) of the point
         const pointGraphic = new Graphic({
           // assign geometry, symbol, attributes, and popup template to the graphic using constructors defined above
           geometry: point,
@@ -142,7 +142,7 @@
         graphicsLayer.add(lineGraphic);
         graphicsLayer.add(polygonGraphic);
 
-        // create a popup for feature layer
+        // create a popup for feature layer (found on Living Atlas)
         const gardensPopup = {
           "title": "Garden",
           "content": ` 
@@ -158,7 +158,6 @@
           popupTemplate: gardensPopup
         });
 
-        // add feature layer to map
         map.add(gardensLayer);
 
         // create a popup for educational facilities (hosted feature layer)
@@ -222,7 +221,7 @@
           }
         }
 
-        // schools/college layer (college in france = secondary school)
+        // schools/colleges layer (college in france = secondary school)
         const schoolsLayer = new FeatureLayer({
           url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/FranceEducationFacilities/FeatureServer",
           outFields: ["name", "amenity", "operator_t"],
@@ -252,7 +251,7 @@
           outFields: ["name", "amenity", "operator_t"],
           popupTemplate: facilitiesPopup,
           renderer: universitiesRenderer,
-          definitionExpression: "amenity = 'university'", // SQL filter for facilities that are colleges or universities
+          definitionExpression: "amenity = 'university'", // SQL filter for facilities that are universities
           labelingInfo: [facilitiesLabel]
         }); 
 
@@ -269,6 +268,7 @@
           }
         }
 
+        // label for university specializations
         const specialsLabel = {
           symbol: {
             type: "text",
@@ -287,6 +287,7 @@
           }
         }
 
+        // new university specializations layer
         const uniSpecial = new FeatureLayer({
           url:"https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/Universities/FeatureServer",
           outFields: ["Specialization"],
